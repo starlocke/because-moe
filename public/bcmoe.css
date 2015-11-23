@@ -13,8 +13,8 @@
 }
 
 .service.na{
-        filter: blur(2px) grayscale(0.8) opacity(30%);
-        -webkit-filter: blur(2px) grayscale(0.8) opacity(30%);
+    filter:  grayscale(0.8) opacity(10%);
+    -webkit-filter: grayscale(0.8) opacity(20%);
 }
 .service-netflix.na{
     filter: blur(2px) grayscale(0.8) opacity(100%);
@@ -44,6 +44,57 @@ img.no{
 }
 .service-daisuki{
     background-image:url("./services/daisuki-800.png")
+}
+
+.service-animelab{
+    background-image:url("./services/animelab-800.png")
+}
+
+.service-animax{
+    background-image:url("./services/animax-800.png")
+}
+
+.service-hanabee{
+    background-image:url("./services/hanabee-800.png")
+}
+
+.service-animenetwork{
+    background-image:url("./services/animenetwork-800.png")
+}
+.simulcast{
+    background-image:url("./tags/current-round.png");
+    background-size: 18px 18px;
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 18px;
+    height: 18px;
+}
+.dub{
+    background-image:url("./tags/dub.png");
+    background-size: 18px 18px;
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    width: 18px;
+    height: 18px;
+}
+.info-item{
+    position:relative;
+    text-align: center;
+    margin: 6px;
+}
+.tag{
+    position:relative;
+    width:30px;
+    height:30px;
+    margin: 2px;
+    margin-right: 15px;
+}
+.desc{
+    position:relative;
+    height:30px;
+    top:2px;
 }
 
 @media only screen and (min-width : 0px) {
@@ -91,6 +142,20 @@ img.no{
         text-align:center;
         margin: 5px;
     }
+    .info-container{
+        background-color:rgba(66,66,66,0.9);
+        border:1px #333333 solid;
+        text-align:center;
+        margin: 5px;
+        height: 50px;
+        color:white;
+        position:relative;
+        font-family: 'HankenBook'; 
+        font-weight: normal; 
+        font-style: normal; 
+        text-align: left;
+        font-size: 20px;
+    }
     a.region-flag{
         display: inline;
         width: 44px;
@@ -133,12 +198,14 @@ img.no{
         background: rgba(255,255,255,0.2)
     }
     .search-clear{
+        
         width: 40px;
         height: 40px;
         vertical-align: center;
         line-height: 40px;
         font-size: 1.2em;
         display:inline-block;
+        display:none;
         position:absolute;
         right: 5px;
         top: 0px;
@@ -203,7 +270,7 @@ img.no{
         margin-top: auto;
         margin-bottom: 0;
         margin-left: 0;
-        width: 50%;
+        width: 100%;
         line-height: 1em;
         font-size:0.8em;
         color:#999999;
@@ -225,6 +292,7 @@ img.no{
     
     .service{
         display:inline-block;
+        position:relative;
         margin:0px 2px;
         width:44px;
         height:44px;
@@ -232,6 +300,7 @@ img.no{
         background-position: center center;
         background-repeat: no-repeat;
     }
+    
     
     
     .footer-container{
@@ -290,12 +359,14 @@ img.no{
         font-size: 30px;
     }
     .search-clear{
+        
         width: 60px;
         height: 60px;
         vertical-align: center;
         line-height: 60px;
         font-size: 1.2em;
         display:inline-block;
+        display:none;
         position:absolute;
         right: 45px;
         top: 0px;
@@ -362,6 +433,9 @@ img.no{
         padding:10px 40px;
     }
     .regions-container{
+        margin: 4px;
+    }
+    .info-container{
         margin: 4px;
     }
 }
@@ -442,12 +516,14 @@ img.no{
         background: rgba(255,255,255,0.2)
     }
     .search-clear{
+       
         width: 80px;
         height: 80px;
         vertical-align: center;
         line-height:80px;
         font-size: 3em;
         display:inline-block;
+         display:none;
         position:absolute;
         right: 16px;
         top: 16px;
@@ -479,7 +555,7 @@ img.no{
         font-style: normal; 
         font-size: 1.8em;
         color:#fff;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
     .results-container::-webkit-scrollbar { 
     display: none; 
@@ -497,7 +573,7 @@ img.no{
         margin-bottom: auto;
         margin-left: 5px;
         position: absolute;
-        width: 50%;
+        width: 45%;
         line-height: 1.2em;
         top: 50%;
         transform: translateY(-50%);
@@ -526,7 +602,7 @@ img.no{
         right:20px;
     }
     .service{
-        
+        position:relative;
     }
    
     .footer-container{
@@ -572,9 +648,19 @@ img.no{
         left: 25px;
         top: 150px;
     }
+    
+    .info-container{
+        position: fixed;
+        width: 350px;
+        left: 25px;
+        top: 220px;
+    }
 }
 @media only screen and (max-width : 767px) {
     .mobile-hide{
+        display:none;
+    }
+    .service.na{
         display:none;
     }
 }

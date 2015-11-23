@@ -8,7 +8,7 @@ from azure.storage.blob import BlobService
 from datetime import datetime
 import animesources
 
-shows = [{"name": "Fullmetal Alchemist: Brotherhood", "sites": {"netflix": "http://www.netflix.com/title/70204981"}}]
+shows = []
 
 with open('title-map.json') as titlemap_file:
 	titlemap = json.load(titlemap_file)
@@ -17,16 +17,8 @@ with open('multi-season.json') as multiseason_file:
 with open('azure.json') as azure_file:
 	azure_storage = json.load(azure_file)
 azure_blob = BlobService(account_name=azure_storage['account'], account_key=azure_storage['key'])
-with open('proxies.json') as proxies_file:
-	proxy_data = json.load(proxies_file)
-	proxy = proxy_data['ca']
 sources = [
-	animesources.Crunchyroll(titlemap, multiseason, 'ca', proxy),
-	animesources.Funimation(titlemap, multiseason, 'ca', proxy), 
-	animesources.Netflix(titlemap, multiseason, 'ca', proxy), 
-	animesources.Daisuki(titlemap, multiseason, 'ca', proxy), 
-	animesources.Viewster(titlemap, multiseason, 'ca', proxy),
-	animesources.AnimeNetwork(titlemap, multiseason, 'ca', proxy)]
+	animesources.AnimeNetwork(titlemap, multiseason)]
 for source in sources:
 	source.UpdateShowList(shows)
 	print(source.GetName() + ': ' + str(len(shows)))
@@ -38,13 +30,7 @@ for alternate in alternates:
 		shows[match_index]['alt'] = alternates[alternate]
 shows = sorted(shows, key = lambda show: show['name'].lower())
 blob = {"lastUpdated": datetime.utcnow().isoformat(), "shows": shows}
-out_file = open('ca.json', 'w')
+out_file = open('test.json', 'w')
 json.dump(blob, out_file)
 out_file.close()
-azure_blob.put_block_blob_from_path(
-	'assets',
-	'ca.json',
-	'ca.json',
-	x_ms_blob_content_type='application/json'
-)
 print('done')

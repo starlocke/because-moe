@@ -19,14 +19,14 @@ with open('azure.json') as azure_file:
 azure_blob = BlobService(account_name=azure_storage['account'], account_key=azure_storage['key'])
 with open('proxies.json') as proxies_file:
 	proxy_data = json.load(proxies_file)
-	proxy = proxy_data['ca']
+	proxy = proxy_data['au']
 sources = [
-	animesources.Crunchyroll(titlemap, multiseason, 'ca', proxy),
-	animesources.Funimation(titlemap, multiseason, 'ca', proxy), 
-	animesources.Netflix(titlemap, multiseason, 'ca', proxy), 
-	animesources.Daisuki(titlemap, multiseason, 'ca', proxy), 
-	animesources.Viewster(titlemap, multiseason, 'ca', proxy),
-	animesources.AnimeNetwork(titlemap, multiseason, 'ca', proxy)]
+	animesources.Crunchyroll(titlemap, multiseason, 'au', proxy), 
+	animesources.Netflix(titlemap, multiseason, 'au', proxy), 
+	animesources.Daisuki(titlemap, multiseason, 'au', proxy), 
+	animesources.Viewster(titlemap, multiseason, 'au', proxy), 
+	animesources.AnimeLab(titlemap, multiseason, 'au', proxy),
+	animesources.Hanabee(titlemap, multiseason, 'au', proxy)]
 for source in sources:
 	source.UpdateShowList(shows)
 	print(source.GetName() + ': ' + str(len(shows)))
@@ -38,13 +38,13 @@ for alternate in alternates:
 		shows[match_index]['alt'] = alternates[alternate]
 shows = sorted(shows, key = lambda show: show['name'].lower())
 blob = {"lastUpdated": datetime.utcnow().isoformat(), "shows": shows}
-out_file = open('ca.json', 'w')
+out_file = open('au.json', 'w')
 json.dump(blob, out_file)
 out_file.close()
 azure_blob.put_block_blob_from_path(
 	'assets',
-	'ca.json',
-	'ca.json',
+	'au.json',
+	'au.json',
 	x_ms_blob_content_type='application/json'
 )
 print('done')
